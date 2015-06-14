@@ -1,0 +1,12 @@
+<resources>
+  <string name="app_name">Data</string>
+
+  <!-- Generic network Errors -->
+  <string name="no_network_error">No network</string>
+  <string name="network_timeout_error">Timeout</string>
+  <string name="request_generic_fail">Server unknown error</string>
+  <string name="request_http_unknown_fail">Http unknown error</string>
+  <string name="request_server_internal_error">Server internal error</string>
+  <string name="request_unknoun_fail">Request unknown error</string>
+
+</resources>

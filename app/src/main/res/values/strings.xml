@@ -1,0 +1,17 @@
+<resources>
+  <string name="app_name">BaseCleanArchitecture</string>
+
+  <string name="debug_info_oncreate">onCreate</string>
+  <string name="debug_info_onresume">onResume</string>
+  <string name="debug_info_onpause">onPause</string>
+  <string name="debug_info_onstop">onStop</string>
+  <string name="debug_info_ondestroy">onDestroy</string>
+  <string name="debug_info_oncreateview">onCreateView</string>
+  <string name="debug_info_onactivitycreated">onActivityCreated</string>
+
+  <string name="menu_settings">Settings</string>
+
+  <string name="phone">Phone</string>
+  <string name="email">Email</string>
+  <string name="location">Location</string>
+</resources>

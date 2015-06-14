@@ -1,0 +1,58 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:1.2.3'
+
+    // NOTE: Do not place your application dependencies here; they belong
+    // in the individual module build.gradle files
+  }
+}
+
+allprojects {
+  repositories {
+    jcenter()
+  }
+
+
+}
+
+
+allprojects {
+
+  ext {
+    // Android config
+    androidBuildToolsVersion = '22.0.1'
+    androidMinSdkVersion = 15
+    androidTargetSdkVersion = 22
+    androidCompileSdkVersion = 22
+    androidApplicationId = 'es.sergiomartinez.basecleanarchitecture'
+    androidVersionCode = 1
+    androidVersionName = '1.0'
+
+    // Libraries
+    libAndroidSupportv7 = 'com.android.support:appcompat-v7:22.2.0'
+    libAndroidSupportDesign = 'com.android.support:design:22.2.0'
+    libPathQueue = 'com.path:android-priority-jobqueue:1.1.2'
+    libCardView = 'com.android.support:cardview-v7:22.2.0'
+    libRecyclerView = 'com.android.support:recyclerview-v7:22.2.0'
+    libDagger = 'com.squareup.dagger:dagger:1.2.2'
+    libDaggerCompiler = 'com.squareup.dagger:dagger-compiler:1.2.2'
+    libButterknife = 'com.jakewharton:butterknife:6.1.0'
+    libRetrofit = 'com.squareup.retrofit:retrofit:1.9.0'
+    libGson = 'com.google.code.gson:gson:2.3.1'
+    libOkhttp = 'com.squareup.okhttp:okhttp:2.2.0'
+    libMappers = 'com.mobandme:android-transformer:1.1.1'
+    libMappersCompiler = 'com.mobandme:android-transformer-compiler:1.1.1'
+    libEventBus = 'de.greenrobot:eventbus:2.4.0'
+    libPicasso = 'com.squareup.picasso:picasso:2.5.2'
+    libCalligraphy = 'uk.co.chrisjenx:calligraphy:2.0.2'
+  }
+
+  repositories {
+    jcenter()
+  }
+}

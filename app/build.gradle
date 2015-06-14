@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+
+def STRING = "String"
+def BOOLEAN = "boolean"
+
+android {
+  compileSdkVersion parent.ext.androidCompileSdkVersion
+  buildToolsVersion parent.ext.androidBuildToolsVersion
+
+  defaultConfig {
+    applicationId parent.ext.androidApplicationId
+    minSdkVersion parent.ext.androidMinSdkVersion
+    targetSdkVersion parent.ext.androidTargetSdkVersion
+    versionCode parent.ext.androidVersionCode
+    versionName parent.ext.androidVersionName
+
+    buildConfigField BOOLEAN, "LOAD_FROM_FILE", 'true'
+    buildConfigField STRING, "API_URL", '"http://api.randomuser.me"'
+    buildConfigField BOOLEAN, "RETROFIT_LOG", "true"
+    buildConfigField BOOLEAN, "PICASSO_LOG", "false"
+
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+
+  packagingOptions {
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/NOTICE.txt'
+  }
+
+  buildTypes {
+    debug {
+      buildConfigField BOOLEAN, "LOAD_FROM_FILE", 'true'
+      buildConfigField STRING, "API_URL", '"http://api.randomuser.me"'
+      buildConfigField BOOLEAN, "RETROFIT_LOG", "true"
+      buildConfigField BOOLEAN, "PICASSO_LOG", "false"
+    }
+    release {
+      buildConfigField BOOLEAN, "LOAD_FROM_FILE", 'false'
+      buildConfigField STRING, "API_URL", '"Lo que sea release"'
+      buildConfigField BOOLEAN, "RETROFIT_LOG", "false"
+      buildConfigField BOOLEAN, "PICASSO_LOG", "false"
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+
+  packagingOptions {
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+  }
+}
+
+dependencies {
+  compile fileTree(dir: 'libs', include: '*.jar')
+  compile parent.ext.libAndroidSupportv7
+  compile parent.ext.libAndroidSupportDesign
+  compile parent.ext.libCardView
+  compile parent.ext.libPathQueue
+  compile parent.ext.libDagger
+  provided parent.ext.libDaggerCompiler
+  compile parent.ext.libButterknife
+  compile parent.ext.libEventBus
+  compile parent.ext.libRecyclerView
+  compile parent.ext.libPicasso
+  compile parent.ext.libCalligraphy
+
+  compile project(':presentation')
+  compile project(':data')
+}
