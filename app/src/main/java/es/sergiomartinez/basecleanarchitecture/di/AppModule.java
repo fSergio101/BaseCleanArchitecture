@@ -30,14 +30,8 @@ import javax.inject.Singleton;
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-@Module(
-    library = true,
-    injects = {
-        App.class
-    },
-    includes = {
-        InteractorsModule.class, DataModule.class
-    }) public class AppModule {
+@Module(includes = { InteractorsModule.class, DataModule.class })
+public class AppModule {
 
   private App app;
 

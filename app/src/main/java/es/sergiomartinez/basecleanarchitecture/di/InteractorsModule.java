@@ -29,9 +29,8 @@ import javax.inject.Singleton;
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-@Module(
-    complete = false,
-    library = true, includes = RepositoryModule.class) public class InteractorsModule {
+@Module(includes = RepositoryModule.class)
+public class InteractorsModule {
 
   @Provides @Singleton GetUsersInteractor provideGetUserInteractor(Bus bus,
       UsersRepository repository) {

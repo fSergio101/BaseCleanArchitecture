@@ -35,10 +35,7 @@ import javax.inject.Singleton;
  * Created by Sergio Martinez Rodriguez
  * Date 14/6/15.
  */
-@Module(
-    library = false,
-    complete = false,
-    injects = { HomeUserListFragment.class })
+@Module
 public class UserListModule {
 
   UserListView userListView;

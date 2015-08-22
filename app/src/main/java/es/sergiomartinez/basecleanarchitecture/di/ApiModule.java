@@ -44,10 +44,7 @@ import retrofit.converter.GsonConverter;
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-@Module(
-    includes = ApiTransformersModule.class,
-    complete = false,
-    library = true)
+@Module(includes = ApiTransformersModule.class)
 public class ApiModule {
 
   // region common

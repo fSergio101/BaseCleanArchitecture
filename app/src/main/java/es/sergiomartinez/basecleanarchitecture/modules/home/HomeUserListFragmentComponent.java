@@ -23,4 +23,5 @@ package es.sergiomartinez.basecleanarchitecture.modules.home;
  * Date 22/8/15.
  */
 public interface HomeUserListFragmentComponent {
+  void injectFragment(HomeUserListFragment homeUserListFragment);
 }

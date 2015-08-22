@@ -26,10 +26,7 @@ import javax.inject.Singleton;
  * Created by Sergio Martinez Rodriguez
  * Date 14/6/15.
  */
-@Module(
-    library = true,
-    complete = false,
-    injects = { MainActivity.class })
+@Module
 public class MainActivityModule {
 
   private MainActivity activity;
