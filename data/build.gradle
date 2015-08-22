@@ -17,6 +17,17 @@
  */
 
 apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+  }
+}
+
 
 android {
   compileSdkVersion parent.ext.androidCompileSdkVersion
@@ -38,5 +49,8 @@ dependencies {
   compile parent.ext.libGson
   compile parent.ext.libMappers
   provided parent.ext.libMappersCompiler
+  apt parent.ext.dagger2compiler
+  compile parent.ext.dagger2
+  provided parent.ext.javaXannotations
 
 }

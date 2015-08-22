@@ -21,12 +21,13 @@ package es.sergiomartinez.basecleanarchitecture.modules.detail;
 import dagger.Component;
 import es.sergiomartinez.basecleanarchitecture.AppComponent;
 import es.sergiomartinez.basecleanarchitecture.di.ActivityModule;
+import es.sergiomartinez.basecleanarchitecture.di.scopes.PerActivity;
 
 /**
  * Created by Sergio Martinez Rodriguez
  * Date 22/8/15.
  */
-@Component(dependencies = AppComponent.class, modules = {ActivityModule.class, UserDetailModule.class})
+@PerActivity @Component(dependencies = AppComponent.class, modules = {ActivityModule.class, UserDetailModule.class})
 public interface UserDetailActivityComponent {
   void injectActivity(UserDetailActivity userDetailActivity);
 }

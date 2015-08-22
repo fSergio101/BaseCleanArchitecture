@@ -20,6 +20,7 @@ package es.sergiomartinez.basecleanarchitecture.data.repository.network.randomus
 
 import android.app.Application;
 import android.content.Context;
+
 import javax.inject.Inject;
 import retrofit.RequestInterceptor;
 

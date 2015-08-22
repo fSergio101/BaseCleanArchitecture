@@ -19,34 +19,31 @@
 package es.sergiomartinez.basecleanarchitecture.base;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import dagger.ObjectGraph;
 import es.sergiomartinez.basecleanarchitecture.App;
+import es.sergiomartinez.basecleanarchitecture.AppComponent;
 import es.sergiomartinez.basecleanarchitecture.R;
-import es.sergiomartinez.basecleanarchitecture.di.ActivityModule;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-public abstract class BaseInjectionActivity  extends AppCompatActivity {
+public abstract class BaseInjectionActivity<T> extends AppCompatActivity{
 
   protected static final String TAG = BaseInjectionActivity.class.getSimpleName();
 
-  private ObjectGraph activityGraph;
+  protected T activityComponent;
 
   //@Inject LoggerManager loggerManager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, getString(R.string.debug_info_oncreate));
-    activityGraph = ((App) getApplication()).addScopedModules(combineModules());
-    activityGraph.inject(this);
+    initDI();
   }
+
+  protected abstract void initDI();
 
   @Override
   protected void onResume() {
@@ -70,33 +67,16 @@ public abstract class BaseInjectionActivity  extends AppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     Log.d(TAG, getString(R.string.debug_info_ondestroy));
-    activityGraph = null;
+    activityComponent = null;
   }
 
-  //public ObjectGraph addScopedModules(Object... modules) {
-  //  return activityGraph.plus(modules);
-  //}
-
-  protected Object[] combineModules(){
-    List<Object> graph = new ArrayList<>();
-    graph.addAll(getModules());
-    graph.add(new ActivityModule(this));
-    return graph.toArray();
+  public AppComponent getAppComponent() {
+    AppComponent appComponent = ((App) getApplication()).getAppComponent();
+    return appComponent;
   }
 
-  public ObjectGraph getActivityGraph() {
-    return activityGraph;
+  public Object getActivityComponent() {
+    return activityComponent;
   }
-
-  protected ObjectGraph addScopedModules(Object... modules) {
-      ObjectGraph activityObjectGraph = getActivityGraph();
-      return activityObjectGraph.plus(modules);
-  }
-
-  public void setActivityGraph(ObjectGraph activityGraph) {
-    this.activityGraph = activityGraph;
-  }
-
-  protected abstract List<Object> getModules();
 
 }

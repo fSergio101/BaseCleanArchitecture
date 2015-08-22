@@ -27,7 +27,7 @@ import dagger.Module;
 import dagger.Provides;
 import javax.inject.Named;
 
-@Module(library = true, complete = true)
+@Module
 public class FragmentModule {
 
   private Context context;

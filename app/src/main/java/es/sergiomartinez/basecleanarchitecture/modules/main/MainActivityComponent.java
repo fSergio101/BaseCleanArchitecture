@@ -21,12 +21,14 @@ package es.sergiomartinez.basecleanarchitecture.modules.main;
 import dagger.Component;
 import es.sergiomartinez.basecleanarchitecture.AppComponent;
 import es.sergiomartinez.basecleanarchitecture.di.ActivityModule;
+import es.sergiomartinez.basecleanarchitecture.di.scopes.PerActivity;
+import es.sergiomartinez.basecleanarchitecture.modules.home.HomeUserListFragment;
 
 /**
  * Created by Sergio Martinez Rodriguez
  * Date 22/8/15.
  */
-@Component(dependencies = AppComponent.class, modules = {ActivityModule.class, MainActivityModule.class})
-public interface MainActivityComponent extends UserListFragment.Pluser{
+@PerActivity @Component(dependencies = AppComponent.class, modules = {ActivityModule.class, MainActivityModule.class})
+public interface MainActivityComponent extends HomeUserListFragment.Pluser{
   void injectActivity(MainActivity mainActivity);
 }

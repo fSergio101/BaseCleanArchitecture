@@ -18,10 +18,15 @@
 
 package es.sergiomartinez.basecleanarchitecture.modules.home;
 
+import dagger.Subcomponent;
+import es.sergiomartinez.basecleanarchitecture.di.FragmentModule;
+import es.sergiomartinez.basecleanarchitecture.di.scopes.PerFragment;
+
 /**
  * Created by Sergio Martinez Rodriguez
  * Date 22/8/15.
  */
+@PerFragment @Subcomponent( modules = {FragmentModule.class, UserListModule.class})
 public interface HomeUserListFragmentComponent {
   void injectFragment(HomeUserListFragment homeUserListFragment);
 }

@@ -26,22 +26,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import dagger.ObjectGraph;
 import es.sergiomartinez.basecleanarchitecture.R;
-import es.sergiomartinez.basecleanarchitecture.di.FragmentModule;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-public abstract class BaseInjectionFragment extends Fragment {
+public abstract class BaseInjectionFragment<T> extends Fragment {
 
   protected static final String TAG = BaseInjectionFragment.class.getSimpleName();
 
-  private ObjectGraph fragmentGraph;
-  private BaseInjectionActivity activity;
+  protected T fragmentComponent;
+  protected BaseInjectionActivity activity;
 
   @Override public void onAttach(Activity activity) {
     super.onAttach(activity);
@@ -52,8 +48,7 @@ public abstract class BaseInjectionFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, getString(R.string.debug_info_oncreate));
-    fragmentGraph = activity.addScopedModules(combineModules());
-    fragmentGraph.inject(this);
+    initDIComponent();
   }
 
   @Override
@@ -91,15 +86,20 @@ public abstract class BaseInjectionFragment extends Fragment {
   public void onDestroy() {
     super.onDestroy();
     Log.d(TAG, getString(R.string.debug_info_ondestroy));
-    fragmentGraph = null;
+    fragmentComponent = null;
   }
 
-  private Object[] combineModules(){
-    List<Object> graph = new ArrayList<>();
-    graph.add(new FragmentModule(activity));
-    graph.addAll(getModules());
-    return graph.toArray();
+  public T getFragmentComponent() {
+    return fragmentComponent;
   }
 
-  protected abstract List<Object> getModules();
+  protected abstract void initDIComponent();
+
+  /**
+   * Gets a component for dependency injection by its type.
+   */
+  protected <C> C getParentComponent(Class<C> componentType) {
+    return componentType.cast(((BaseInjectionActivity) getActivity()).getActivityComponent());
+  }
+
 }

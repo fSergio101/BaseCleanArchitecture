@@ -22,6 +22,7 @@ import com.mobandme.android.transformer.Transformer;
 import dagger.Module;
 import dagger.Provides;
 import es.sergiomartinez.basecleanarchitecture.data.datamodel.entities.ApiUser;
+import es.sergiomartinez.basecleanarchitecture.di.scopes.PerFragment;
 import es.sergiomartinez.basecleanarchitecture.domain.abstractions.Bus;
 import es.sergiomartinez.basecleanarchitecture.domain.inteactors.InteractorInvoker;
 import es.sergiomartinez.basecleanarchitecture.domain.inteactors.users.GetUsersInteractor;
@@ -44,12 +45,12 @@ public class UserListModule {
     this.userListView = userListView;
   }
 
-  @Provides @Singleton @Named("PresentationUserTransformer")
+  @Provides @PerFragment @Named("PresentationUserTransformer")
   Transformer providePresentationUserTransformer() {
     return new Transformer.Builder().build(PresentationUser.class);
   }
 
-  @Provides @Singleton HomeUserListPresenter provideUserDetailPresenter(Bus bus,
+  @Provides @PerFragment HomeUserListPresenter provideUserDetailPresenter(Bus bus,
       InteractorInvoker interactorInvoker, GetUsersInteractor getUsersInteractor,
       @Named("PresentationUserTransformer") Transformer userTransformer){
     return new HomeUserListPresenter(bus, interactorInvoker, getUsersInteractor, userTransformer, userListView);

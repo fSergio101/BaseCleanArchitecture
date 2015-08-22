@@ -21,6 +21,7 @@ package es.sergiomartinez.basecleanarchitecture.modules.detail;
 import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
+import es.sergiomartinez.basecleanarchitecture.di.scopes.PerActivity;
 import es.sergiomartinez.basecleanarchitecture.presentation.detail.UserDetailPresenter;
 import es.sergiomartinez.basecleanarchitecture.presentation.detail.UserDetailView;
 import javax.inject.Singleton;
@@ -38,7 +39,7 @@ public class UserDetailModule {
     this.userDetailView = userDetailView;
   }
 
-  @Provides @Singleton UserDetailPresenter provideUserDetailPresenter(Gson gson){
+  @Provides @PerActivity UserDetailPresenter provideUserDetailPresenter(Gson gson){
    return new UserDetailPresenter(userDetailView, gson);
   }
 

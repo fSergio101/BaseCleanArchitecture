@@ -29,20 +29,20 @@ import com.google.gson.Gson;
 import es.sergiomartinez.basecleanarchitecture.R;
 import es.sergiomartinez.basecleanarchitecture.base.BaseUIFragment;
 import es.sergiomartinez.basecleanarchitecture.data.error.exceptions.RequestException;
+import es.sergiomartinez.basecleanarchitecture.di.FragmentModule;
+import es.sergiomartinez.basecleanarchitecture.modules.main.MainActivityComponent;
 import es.sergiomartinez.basecleanarchitecture.presentation.home.HomeUserListPresenter;
 import es.sergiomartinez.basecleanarchitecture.presentation.home.UserListView;
 import es.sergiomartinez.basecleanarchitecture.presentation.model.PresentationUser;
 import es.sergiomartinez.basecleanarchitecture.ui.imageloader.ImageLoader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.inject.Inject;
 
 /**
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-public class HomeUserListFragment extends BaseUIFragment implements UserListView{
+public class HomeUserListFragment extends BaseUIFragment<HomeUserListFragmentComponent> implements UserListView{
 
   @Inject ImageLoader imageLoader;
   @Inject Gson gson;
@@ -65,10 +65,6 @@ public class HomeUserListFragment extends BaseUIFragment implements UserListView
     recyclerView.setAdapter(userListAdapter);
   }
 
-  @Override protected List<Object> getModules() {
-    return Arrays.<Object>asList(new UserListModule(this));
-  }
-
   @Override public void dismissLoader() {
     //TODO implement loader
   }
@@ -85,6 +81,17 @@ public class HomeUserListFragment extends BaseUIFragment implements UserListView
   @Override public void onPause() {
     super.onPause();
     homeUserListPresenter.onPause();
+  }
+
+  //region dependency injection Methods
+  @Override protected void initDIComponent() {
+    fragmentComponent = (getParentComponent(MainActivityComponent.class)).plus(
+        new FragmentModule(getActivity()), new UserListModule(this));
+    fragmentComponent.injectFragment(this);
+  }
+
+  public interface Pluser{
+    HomeUserListFragmentComponent plus(FragmentModule secondFragmentModule, UserListModule userListModule);
   }
 
   @Override public void showEror(Throwable error) {

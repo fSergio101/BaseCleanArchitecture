@@ -19,10 +19,7 @@
 package es.sergiomartinez.basecleanarchitecture;
 
 import android.app.Application;
-import dagger.ObjectGraph;
 import es.sergiomartinez.basecleanarchitecture.di.AppModule;
-import java.util.Arrays;
-import java.util.List;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
@@ -31,13 +28,18 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  */
 public class App extends Application{
 
-  private ObjectGraph objectGraph;
+  private AppComponent appComponent;
 
   @Override public void onCreate() {
     super.onCreate();
-    objectGraph = ObjectGraph.create(getModules().toArray());
-    objectGraph.inject(this);
+
+    initDI();
     init();
+  }
+
+  private void initDI() {
+    appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+    appComponent.inject(this);
   }
 
   private void init() {
@@ -51,16 +53,8 @@ public class App extends Application{
     );
   }
 
-  private List<Object> getModules() {
-    return Arrays.<Object>asList(new AppModule(this));
-  }
-
-  public ObjectGraph getMainGraph() {
-    return objectGraph;
-  }
-
-  public ObjectGraph addScopedModules(Object... modules) {
-    return objectGraph.plus(modules);
+  public AppComponent getAppComponent() {
+    return appComponent;
   }
 
 }

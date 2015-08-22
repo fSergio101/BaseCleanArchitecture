@@ -30,9 +30,7 @@ import javax.inject.Singleton;
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-@Module(includes = ApiModule.class,
-    complete = false,
-    library = true)
+@Module(includes = ApiModule.class)
 public class RepositoryModule {
 
   // region Repositories

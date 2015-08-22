@@ -21,6 +21,7 @@ package es.sergiomartinez.basecleanarchitecture.domain.inteactors.users;
 import es.sergiomartinez.basecleanarchitecture.domain.abstractions.Bus;
 import es.sergiomartinez.basecleanarchitecture.domain.inteactors.Interactor;
 import es.sergiomartinez.basecleanarchitecture.domain.repository.UsersRepository;
+import javax.inject.Inject;
 
 /**
  * Created by Sergio Martinez Rodriguez
@@ -31,6 +32,7 @@ public class GetUsersInteractor implements Interactor {
   private final Bus bus;
   private final UsersRepository usersRepository;
 
+  @Inject
   public GetUsersInteractor(Bus bus, UsersRepository usersRepository) {
     this.bus = bus;
     this.usersRepository = usersRepository;

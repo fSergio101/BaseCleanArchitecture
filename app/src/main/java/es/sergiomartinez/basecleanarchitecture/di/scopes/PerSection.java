@@ -16,20 +16,17 @@
  *
  */
 
-package es.sergiomartinez.basecleanarchitecture.base;
+package es.sergiomartinez.basecleanarchitecture.di.scopes;
 
-import butterknife.ButterKnife;
+import java.lang.annotation.Retention;
+import javax.inject.Scope;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Created by Sergio Martinez Rodriguez
- * Date 13/6/15.
+ * Date 15/7/15.
  */
-public abstract class BaseUIActivity<T> extends BaseInjectionActivity<T> {
-
-  @Override public void setContentView(int layoutResID) {
-      super.setContentView(layoutResID);
-      ButterKnife.inject(this);
-  }
-
-
-}
+@Scope
+@Retention(RUNTIME)
+public @interface PerSection {}
