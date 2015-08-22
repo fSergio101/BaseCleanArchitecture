@@ -16,26 +16,17 @@
  *
  */
 
-package es.sergiomartinez.basecleanarchitecture.modules.main;
+package es.sergiomartinez.basecleanarchitecture.modules.home;
 
-import dagger.Module;
-import dagger.Provides;
-import javax.inject.Singleton;
+import dagger.Subcomponent;
+import es.sergiomartinez.basecleanarchitecture.di.FragmentModule;
+import es.sergiomartinez.basecleanarchitecture.di.scopes.PerFragment;
 
 /**
  * Created by Sergio Martinez Rodriguez
- * Date 14/6/15.
+ * Date 22/8/15.
  */
-@Module
-public class MainActivityModule {
-
-  private MainActivity activity;
-
-  public MainActivityModule(MainActivity mainActivity) {
-   this.activity = mainActivity;
-  }
-
-  @Provides @Singleton MainActivity provideMainActivity(){
-    return activity;
-  }
+@PerFragment @Subcomponent( modules = {FragmentModule.class, UserListModule.class})
+public interface HomeUserListFragmentComponent {
+  void injectFragment(HomeUserListFragment homeUserListFragment);
 }

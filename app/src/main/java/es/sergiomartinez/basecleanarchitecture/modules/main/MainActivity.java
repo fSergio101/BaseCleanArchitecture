@@ -18,10 +18,10 @@
 
 package es.sergiomartinez.basecleanarchitecture.modules.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -32,15 +32,14 @@ import android.view.View;
 import butterknife.InjectView;
 import es.sergiomartinez.basecleanarchitecture.R;
 import es.sergiomartinez.basecleanarchitecture.base.BaseUIActivity;
+import es.sergiomartinez.basecleanarchitecture.di.ActivityModule;
 import es.sergiomartinez.basecleanarchitecture.modules.home.HomeUserListFragment;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-public class MainActivity extends BaseUIActivity {
+public class MainActivity extends BaseUIActivity<MainActivityComponent> {
 
   @InjectView(R.id.toolbar) Toolbar toolbar;
   @InjectView(R.id.drawer_layout) DrawerLayout drawerLayout;
@@ -57,6 +56,13 @@ public class MainActivity extends BaseUIActivity {
     setupFabButton();
     setupHomeFragment();
 
+  }
+
+  @Override protected void initDI() {
+    activityComponent = DaggerMainActivityComponent.builder().appComponent(getAppComponent())
+        .activityModule(new ActivityModule(this))
+        .mainActivityModule(new MainActivityModule(this)).build();
+    activityComponent.injectActivity(this);
   }
 
   private void setupHomeFragment() {
@@ -93,10 +99,6 @@ public class MainActivity extends BaseUIActivity {
     final ActionBar ab = getSupportActionBar();
     ab.setHomeAsUpIndicator(R.drawable.ic_menu);
     ab.setDisplayHomeAsUpEnabled(true);
-  }
-
-  @Override protected List<Object> getModules() {
-    return Arrays.<Object>asList(new MainActivityModule(this));
   }
 
   @Override

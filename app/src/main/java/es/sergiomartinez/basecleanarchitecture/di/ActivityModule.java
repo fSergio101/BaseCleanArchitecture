@@ -32,9 +32,7 @@ import javax.inject.Singleton;
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-@Module(
-    complete = false,
-    library = true)
+@Module
 public class ActivityModule {
 
   private BaseUIActivity activity;

@@ -16,26 +16,17 @@
  *
  */
 
-package es.sergiomartinez.basecleanarchitecture.modules.main;
+package es.sergiomartinez.basecleanarchitecture.di.scopes;
 
-import dagger.Module;
-import dagger.Provides;
-import javax.inject.Singleton;
+import java.lang.annotation.Retention;
+import javax.inject.Scope;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Created by Sergio Martinez Rodriguez
- * Date 14/6/15.
+ * Date 15/7/15.
  */
-@Module
-public class MainActivityModule {
-
-  private MainActivity activity;
-
-  public MainActivityModule(MainActivity mainActivity) {
-   this.activity = mainActivity;
-  }
-
-  @Provides @Singleton MainActivity provideMainActivity(){
-    return activity;
-  }
-}
+@Scope
+@Retention(RUNTIME)
+public @interface PerActivity {}

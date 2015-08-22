@@ -29,18 +29,17 @@ import android.widget.TextView;
 import butterknife.InjectView;
 import es.sergiomartinez.basecleanarchitecture.R;
 import es.sergiomartinez.basecleanarchitecture.base.BaseUIActivity;
+import es.sergiomartinez.basecleanarchitecture.di.ActivityModule;
 import es.sergiomartinez.basecleanarchitecture.presentation.detail.UserDetailPresenter;
 import es.sergiomartinez.basecleanarchitecture.presentation.detail.UserDetailView;
 import es.sergiomartinez.basecleanarchitecture.ui.imageloader.ImageLoader;
-import java.util.Arrays;
-import java.util.List;
 import javax.inject.Inject;
 
 /**
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-public class UserDetailActivity extends BaseUIActivity implements UserDetailView {
+public class UserDetailActivity extends BaseUIActivity<UserDetailActivityComponent> implements UserDetailView {
 
   @Inject UserDetailPresenter userDetailPresenter;
   @Inject ImageLoader imageLoader;
@@ -105,8 +104,11 @@ public class UserDetailActivity extends BaseUIActivity implements UserDetailView
     return true;
   }
 
-  @Override protected List<Object> getModules() {
-    return Arrays.<Object>asList(new UserDetailModule(this));
+  @Override protected void initDI() {
+    activityComponent = DaggerUserDetailActivityComponent.builder().appComponent(getAppComponent())
+        .activityModule(new ActivityModule(this))
+        .userDetailModule(new UserDetailModule(this)).build();
+    activityComponent.injectActivity(this);
   }
 
 

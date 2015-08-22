@@ -57,17 +57,18 @@ allprojects {
     libPathQueue = 'com.path:android-priority-jobqueue:1.1.2'
     libCardView = 'com.android.support:cardview-v7:22.2.0'
     libRecyclerView = 'com.android.support:recyclerview-v7:22.2.0'
-    libDagger = 'com.squareup.dagger:dagger:1.2.2'
-    libDaggerCompiler = 'com.squareup.dagger:dagger-compiler:1.2.2'
     libButterknife = 'com.jakewharton:butterknife:6.1.0'
     libRetrofit = 'com.squareup.retrofit:retrofit:1.9.0'
     libGson = 'com.google.code.gson:gson:2.3.1'
     libOkhttp = 'com.squareup.okhttp:okhttp:2.2.0'
-    libMappers = 'com.mobandme:android-transformer:1.1.1'
-    libMappersCompiler = 'com.mobandme:android-transformer-compiler:1.1.1'
+    libMappers = 'com.mobandme:android-transformer:1.2'
+    libMappersCompiler = 'com.mobandme:android-transformer-compiler:1.2'
     libEventBus = 'de.greenrobot:eventbus:2.4.0'
     libPicasso = 'com.squareup.picasso:picasso:2.5.2'
     libCalligraphy = 'uk.co.chrisjenx:calligraphy:2.0.2'
+    dagger2compiler = 'com.google.dagger:dagger-compiler:2.0'
+    dagger2 = 'com.google.dagger:dagger:2.0'
+    javaXannotations = 'org.glassfish:javax.annotation:10.0-b28'
   }
 
   repositories {

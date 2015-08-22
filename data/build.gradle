@@ -33,12 +33,11 @@ android {
 
 dependencies {
   compile project(':repository')
-  compile parent.ext.libDagger
-  provided parent.ext.libDaggerCompiler
   compile parent.ext.libRetrofit
   compile parent.ext.libOkhttp
   compile parent.ext.libGson
   compile parent.ext.libMappers
   provided parent.ext.libMappersCompiler
+  compile 'javax.inject:javax.inject:1'
 
 }

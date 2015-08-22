@@ -29,9 +29,7 @@ import javax.inject.Singleton;
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-@Module(
-    complete = true,
-    library = true)
+@Module
 public class ApiTransformersModule {
   @Provides @Singleton @Named("ApiUserTransformer") Transformer provideApiUserTransformer() {
     return new Transformer.Builder().build(ApiUser.class);

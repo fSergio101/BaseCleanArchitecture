@@ -17,9 +17,20 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 def STRING = "String"
 def BOOLEAN = "boolean"
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+  }
+}
+
 
 android {
   compileSdkVersion parent.ext.androidCompileSdkVersion
@@ -80,13 +91,14 @@ dependencies {
   compile parent.ext.libAndroidSupportDesign
   compile parent.ext.libCardView
   compile parent.ext.libPathQueue
-  compile parent.ext.libDagger
-  provided parent.ext.libDaggerCompiler
   compile parent.ext.libButterknife
   compile parent.ext.libEventBus
   compile parent.ext.libRecyclerView
   compile parent.ext.libPicasso
   compile parent.ext.libCalligraphy
+  apt parent.ext.dagger2compiler
+  compile parent.ext.dagger2
+  provided parent.ext.javaXannotations
 
   compile project(':presentation')
   compile project(':data')

@@ -16,26 +16,18 @@
  *
  */
 
-package es.sergiomartinez.basecleanarchitecture.modules.main;
+package es.sergiomartinez.basecleanarchitecture.modules.detail;
 
-import dagger.Module;
-import dagger.Provides;
-import javax.inject.Singleton;
+import dagger.Component;
+import es.sergiomartinez.basecleanarchitecture.AppComponent;
+import es.sergiomartinez.basecleanarchitecture.di.ActivityModule;
+import es.sergiomartinez.basecleanarchitecture.di.scopes.PerActivity;
 
 /**
  * Created by Sergio Martinez Rodriguez
- * Date 14/6/15.
+ * Date 22/8/15.
  */
-@Module
-public class MainActivityModule {
-
-  private MainActivity activity;
-
-  public MainActivityModule(MainActivity mainActivity) {
-   this.activity = mainActivity;
-  }
-
-  @Provides @Singleton MainActivity provideMainActivity(){
-    return activity;
-  }
+@PerActivity @Component(dependencies = AppComponent.class, modules = {ActivityModule.class, UserDetailModule.class})
+public interface UserDetailActivityComponent {
+  void injectActivity(UserDetailActivity userDetailActivity);
 }

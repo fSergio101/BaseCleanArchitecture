@@ -16,36 +16,33 @@
  *
  */
 
-package es.sergiomartinez.basecleanarchitecture.domain.inteactors.users;
+package es.sergiomartinez.basecleanarchitecture;
 
+import android.app.Application;
+import android.content.Context;
+import com.google.gson.Gson;
+import dagger.Component;
+import es.sergiomartinez.basecleanarchitecture.di.AppModule;
 import es.sergiomartinez.basecleanarchitecture.domain.abstractions.Bus;
-import es.sergiomartinez.basecleanarchitecture.domain.inteactors.Interactor;
+import es.sergiomartinez.basecleanarchitecture.domain.inteactors.InteractorInvoker;
 import es.sergiomartinez.basecleanarchitecture.domain.repository.UsersRepository;
-import javax.inject.Inject;
+
+import es.sergiomartinez.basecleanarchitecture.ui.imageloader.ImageLoader;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * Created by Sergio Martinez Rodriguez
- * Date 14/6/15.
+ * Date 22/8/15.
  */
-public class GetUsersInteractor implements Interactor {
-
-  private final Bus bus;
-  private final UsersRepository usersRepository;
-
-  @Inject
-  public GetUsersInteractor(Bus bus, UsersRepository usersRepository) {
-    this.bus = bus;
-    this.usersRepository = usersRepository;
-  }
-
-  @Override public void execute() throws Throwable {
-    GetUsersEvent event = new GetUsersEvent();
-    try {
-      event.setUserList(usersRepository.getUsers());
-    } catch (Exception e) {
-      event.setError(e);
-    }
-    bus.post(event);
-  }
-
+@Singleton @Component(modules = AppModule.class)
+public interface AppComponent {
+  void inject(App app);
+  Application provideApplication();
+  @Named("applicationContext") Context provideApplicationContext();
+  InteractorInvoker provideInteractorInvoker();
+  Bus provideEventbus();
+  ImageLoader provideImageLoader();
+  Gson provideGson();
+  UsersRepository provideUsersRepository();
 }

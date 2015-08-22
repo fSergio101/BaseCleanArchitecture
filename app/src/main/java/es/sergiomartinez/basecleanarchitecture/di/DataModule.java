@@ -41,7 +41,7 @@ import retrofit.Endpoints;
  * Created by Sergio Martinez Rodriguez
  * Date 13/6/15.
  */
-@Module(complete = false, library = true)
+@Module
 public class DataModule {
 
   @Provides @Singleton @RetrofitLog boolean provideRetrofitLog() {

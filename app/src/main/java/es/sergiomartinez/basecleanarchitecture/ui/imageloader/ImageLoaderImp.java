@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import es.sergiomartinez.basecleanarchitecture.R;
+import javax.inject.Inject;
 
 /**
  * Created by Sergio Martinez Rodriguez
