@@ -68,6 +68,9 @@ allprojects {
     libEventBus = 'de.greenrobot:eventbus:2.4.0'
     libPicasso = 'com.squareup.picasso:picasso:2.5.2'
     libCalligraphy = 'uk.co.chrisjenx:calligraphy:2.0.2'
+    dagger2compiler = 'com.google.dagger:dagger-compiler:2.0'
+    dagger2 = 'com.google.dagger:dagger:2.0'
+    javaXannotations = 'org.glassfish:javax.annotation:10.0-b28'
   }
 
   repositories {
