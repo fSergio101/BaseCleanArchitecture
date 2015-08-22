@@ -41,9 +41,12 @@ public abstract class BaseInjectionActivity<T> extends AppCompatActivity{
     super.onCreate(savedInstanceState);
     Log.d(TAG, getString(R.string.debug_info_oncreate));
     initDI();
+    Log.d(TAG, activityComponent.toString());
   }
 
   protected abstract void initDI();
+
+  abstract public void onActivityDestroyed();
 
   @Override
   protected void onResume() {
@@ -76,6 +79,11 @@ public abstract class BaseInjectionActivity<T> extends AppCompatActivity{
   }
 
   public Object getActivityComponent() {
+
+    if (activityComponent == null){
+      this.finish();
+      this.recreate();
+    }
     return activityComponent;
   }
 

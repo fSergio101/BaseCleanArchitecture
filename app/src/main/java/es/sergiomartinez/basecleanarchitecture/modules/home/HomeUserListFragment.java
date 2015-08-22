@@ -19,12 +19,12 @@
 package es.sergiomartinez.basecleanarchitecture.modules.home;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import butterknife.InjectView;
 import com.google.gson.Gson;
 import es.sergiomartinez.basecleanarchitecture.R;
 import es.sergiomartinez.basecleanarchitecture.base.BaseUIFragment;
@@ -48,13 +48,13 @@ public class HomeUserListFragment extends BaseUIFragment<HomeUserListFragmentCom
   @Inject Gson gson;
   @Inject HomeUserListPresenter homeUserListPresenter;
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    RecyclerView recyclerView = (RecyclerView) inflater.inflate(
-        R.layout.fragment_user_list, container, false);
-    setupRecyclerView(recyclerView);
-    homeUserListPresenter.getUsers();
-    return recyclerView;
+  @InjectView(R.id.recyclerview) RecyclerView recyclerView;
+
+  @Override protected void initFragmentData(View view, @Nullable Bundle savedInstanceState) {
+    if (homeUserListPresenter!=null){
+      setupRecyclerView(recyclerView);
+      homeUserListPresenter.getUsers();
+    }
   }
 
   private void setupRecyclerView(RecyclerView recyclerView) {
@@ -88,6 +88,10 @@ public class HomeUserListFragment extends BaseUIFragment<HomeUserListFragmentCom
     fragmentComponent = (getParentComponent(MainActivityComponent.class)).plus(
         new FragmentModule(getActivity()), new UserListModule(this));
     fragmentComponent.injectFragment(this);
+  }
+
+  @Override public int getLayout() {
+    return R.layout.fragment_user_list;
   }
 
   public interface Pluser{

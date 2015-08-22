@@ -18,6 +18,8 @@
 
 package es.sergiomartinez.basecleanarchitecture.base;
 
+import android.content.Intent;
+import android.os.Bundle;
 import butterknife.ButterKnife;
 
 /**
@@ -29,6 +31,39 @@ public abstract class BaseUIActivity<T> extends BaseInjectionActivity<T> {
   @Override public void setContentView(int layoutResID) {
       super.setContentView(layoutResID);
       ButterKnife.inject(this);
+  }
+
+  /**
+   * Navigate to targetClass activity with empty Bundle params
+   */
+  public void navigate(Class<?> targetClass) {
+    navigate(targetClass, new Bundle());
+  }
+
+  /**
+   * Navigate to targetClass activity with params Bundle params
+   */
+  public void navigate(Class<?> targetClass, Bundle params) {
+    Intent i = new Intent(this, targetClass);
+    if (params != null && !params.isEmpty()) {
+      i.putExtras(params);
+    }
+    startActivity(i);
+  }
+
+  /**
+   * Navigate to targetClass activity with params Bundle params
+   */
+  public void navigate(Class<?> targetClass, int flag) {
+    Intent i = new Intent(this, targetClass);
+    i.setFlags(flag);
+    startActivity(i);
+  }
+
+
+  @Override public void onActivityDestroyed() {
+    navigate(this.getClass());
+    this.finish();
   }
 
 

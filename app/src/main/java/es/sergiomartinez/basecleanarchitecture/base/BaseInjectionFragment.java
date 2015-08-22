@@ -38,6 +38,7 @@ public abstract class BaseInjectionFragment<T> extends Fragment {
 
   protected T fragmentComponent;
   protected BaseInjectionActivity activity;
+  private boolean injectionSuccessful = false;
 
   @Override public void onAttach(Activity activity) {
     super.onAttach(activity);
@@ -48,7 +49,18 @@ public abstract class BaseInjectionFragment<T> extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, getString(R.string.debug_info_oncreate));
-    initDIComponent();
+    try{
+      initDIComponent();
+      injectionSuccessful = true;
+    }catch (NullPointerException e){
+      Log.d(TAG, "Activity info has been destroyed");
+      injectionSuccessful = false;
+      activity.onActivityDestroyed();
+    }
+  }
+
+  public boolean isInjectionSuccessful() {
+    return injectionSuccessful;
   }
 
   @Override

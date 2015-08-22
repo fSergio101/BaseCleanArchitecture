@@ -20,6 +20,7 @@ package es.sergiomartinez.basecleanarchitecture.data.repository.network.randomus
 
 import com.mobandme.android.transformer.Transformer;
 import es.sergiomartinez.basecleanarchitecture.data.datamodel.entities.ApiResult;
+import es.sergiomartinez.basecleanarchitecture.data.datamodel.entities.ApiUser;
 import es.sergiomartinez.basecleanarchitecture.data.datamodel.response.GetUsersResponse;
 import es.sergiomartinez.basecleanarchitecture.data.repository.network.randomusersapi.RandomUsersApiService;
 import es.sergiomartinez.basecleanarchitecture.domain.entities.User;

@@ -26,6 +26,7 @@ import es.sergiomartinez.basecleanarchitecture.di.AppModule;
 import es.sergiomartinez.basecleanarchitecture.domain.abstractions.Bus;
 import es.sergiomartinez.basecleanarchitecture.domain.inteactors.InteractorInvoker;
 import es.sergiomartinez.basecleanarchitecture.domain.repository.UsersRepository;
+
 import es.sergiomartinez.basecleanarchitecture.ui.imageloader.ImageLoader;
 import javax.inject.Named;
 import javax.inject.Singleton;
