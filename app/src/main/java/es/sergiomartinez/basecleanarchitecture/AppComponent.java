@@ -20,14 +20,12 @@ package es.sergiomartinez.basecleanarchitecture;
 
 import android.app.Application;
 import android.content.Context;
-import com.google.gson.Gson;
 import dagger.Component;
+import es.sergiomartinez.basecleanarchitecture.di.ApiProviderInterface;
 import es.sergiomartinez.basecleanarchitecture.di.AppModule;
-import es.sergiomartinez.basecleanarchitecture.domain.abstractions.Bus;
-import es.sergiomartinez.basecleanarchitecture.domain.inteactors.InteractorInvoker;
-import es.sergiomartinez.basecleanarchitecture.domain.repository.UsersRepository;
+import es.sergiomartinez.basecleanarchitecture.di.DataProviderInterface;
+import es.sergiomartinez.basecleanarchitecture.di.RepositoryProviderInterface;
 
-import es.sergiomartinez.basecleanarchitecture.ui.imageloader.ImageLoader;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -36,13 +34,9 @@ import javax.inject.Singleton;
  * Date 22/8/15.
  */
 @Singleton @Component(modules = AppModule.class)
-public interface AppComponent {
+public interface AppComponent extends DataProviderInterface, ApiProviderInterface,
+    RepositoryProviderInterface{
   void inject(App app);
   Application provideApplication();
   @Named("applicationContext") Context provideApplicationContext();
-  InteractorInvoker provideInteractorInvoker();
-  Bus provideEventbus();
-  ImageLoader provideImageLoader();
-  Gson provideGson();
-  UsersRepository provideUsersRepository();
 }
